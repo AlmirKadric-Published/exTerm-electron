@@ -1,0 +1,38 @@
+productName: "exTerm"
+appId: "com.almirkadric.exTerm"
+
+directories:
+    app: "./app"
+    output: "./build"
+
+
+
+# windows distribution settings
+win:
+    icon: "./visual_identity/icon/exTerm.ico"
+
+nsis:
+    installerIcon: "./visual_identity/icon/exTerm.ico"
+    license: "./LICENSE.md"
+
+
+
+# macOS distribution settings
+mac:
+    category: "public.app-category.utilities"
+    icon: "./visual_identity/icon/exTerm.icns"
+
+dmg:
+    icon: "./visual_identity/icon/exTerm.icns"
+    background: # TODO
+
+
+
+# linux distribution settings
+linux:
+    category: "TerminalEmulator"
+    desktop:
+        # TODO: we should define these
+
+deb:
+    synopsis: "A modern cross platform terminal multiplexer, heavily inspired by iTerm"

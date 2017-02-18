@@ -1,7 +1,6 @@
 {
   "name": "exTerm",
-  "productName": "exTerm",
-  "description": "A modern cross platform terminal multiplexer built using electron and web technologies, heavily inspired by iTerm",
+  "description": "A modern cross platform terminal multiplexer, heavily inspired by iTerm, built using electron and web technologies",
   "version": "0.1.0",
   "homepage": "https://github.com/AlmirKadric-org/exTerm-electron",
   "license": "MIT",
@@ -15,18 +14,12 @@
   },
   "scripts": {
     "deps": "npm install . && install-app-deps",
-    "build": "webpack -p && build",
-    "build:open": "open ./build/mac/exTerm.app",
     "dev": "electron ./app --dev",
-    "test": "eslint ."
-  },
-  "build": {
-    "appId": "com.almirkadric.exTerm",
-    "category": "public.app-category.utilities",
-    "directories": {
-      "app": "./app",
-      "output": "./build"
-    }
+    "test": "eslint .",
+    "icons:win": "png2ico ./visual_identity/icon/exTerm.ico ./visual_identity/icon/exTerm.iconset/icon_16x16.png ./visual_identity/icon/exTerm.iconset/icon_32x32.png ./visual_identity/icon/exTerm.iconset/icon_64x64.png ./visual_identity/icon/exTerm.iconset/icon_128x128.png",
+    "icons:mac": "iconutil -c icns ./visual_identity/icon/exTerm.iconset",
+    "build": "webpack -p && build",
+    "build:open": "open ./build/mac/exTerm.app"
   },
   "dependencies": {
     "npm-run-all": "4.0.1",

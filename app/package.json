@@ -1,7 +1,6 @@
 {
   "name": "exTerm",
-  "productName": "exTerm",
-  "description": "A modern cross platform terminal multiplexer built using electron and web technologies, heavily inspired by iTerm",
+  "description": "A modern cross platform terminal multiplexer, heavily inspired by iTerm, built using electron and web technologies",
   "version": "0.1.0",
   "homepage": "https://github.com/AlmirKadric-org/exTerm-electron",
   "license": "MIT",

@@ -1,26 +1,26 @@
 exTerm
 ======
 
-A modern cross platform terminal multiplexer built using electron and web technologies, heavily
-inspired by iTerm.
+A modern cross platform terminal multiplexer, heavily inspired by iTerm, built using electron and
+web technologies.
 
 
 Features
 --------
 
-###Tab & Pane Management
+### Tab & Pane Management
  - Pane splitting
  - Tab creation
 
-###Drag Drop
+### Drag Drop
  - Move panes around & between windows
  - Resize panes
 
-###Input Broadcasting
+### Input Broadcasting
  - Attach/Detach Panes to Current Broadcast Group
  - Create multiple Broadcast Groups
 
-###Developer
+### Developer
  - Restore previous sessions on window refresh
 
 
