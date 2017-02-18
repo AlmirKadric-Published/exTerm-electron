@@ -1,0 +1,27 @@
+.multiplexer {
+	>.pane {
+		.drop-indicator {
+			top: 20px;
+		}
+
+		.emulator {
+			top: 20px;
+			padding: 5px 0 5px 5px;
+			background-color: #000000;
+
+			&.active {
+				-webkit-user-select: text;
+			}
+		}
+
+		&.noTitle {
+			.drop-indicator, .emulator {
+				top: 0px;
+			}
+		}
+	}
+}
+
+.dragging .multiplexer >.pane .emulator.active {
+	-webkit-user-select: none;
+}

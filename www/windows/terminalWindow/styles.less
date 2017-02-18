@@ -1,0 +1,56 @@
+body {
+	position: absolute;
+	top: 0px; bottom: 0px;
+	left: 0px; right: 0px;
+
+	margin: 0px;
+
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	color: #333333;
+
+	-webkit-user-select: none;
+}
+
+#app {
+	position: absolute;
+	top: 0px; bottom: 0px;
+	left: 0px; right: 0px;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+td, th {
+	padding: 0;
+}
+
+.hide {
+	display: none !important;
+}
+
+.fill {
+	position: absolute;
+	left: 0px; right: 0px;
+	top: 0px; bottom: 0px;
+}
+
+.overlay {
+	position: absolute;
+	left: 0px; right: 0px;
+	top: 0px; bottom: 0px;
+
+	z-index: 10;
+}
+
+.dragging {
+	&.resize-col {
+		cursor: col-resize !important;
+	}
+
+	&.resize-row {
+		cursor: row-resize !important;
+	}
+}

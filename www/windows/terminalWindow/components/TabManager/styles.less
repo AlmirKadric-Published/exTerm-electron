@@ -1,0 +1,74 @@
+.tabManager {
+	.tabButtons {
+		display: block;
+		position: absolute;
+		overflow: hidden;
+
+		left: 0px;
+		right: 0px;
+		top: 0px;
+		height: 22px;
+
+		line-height: 22px;
+		background-color: #D0D0D0;
+		border-bottom: 1px solid #B0B0B0;
+
+		.tabButton {
+			display: inline-table;
+			width: 150px;
+
+			cursor: pointer;
+			text-align: center;
+			border-right: 1px solid #C0C0C0;
+
+			&:hover {
+				background-color: #C0C0C0;
+			}
+
+			&.active {
+				background-color: #E0E0E0;
+			}
+
+			tr {
+				height: 100%;
+			}
+
+			.close {
+				display: table-cell;
+				width: 22px;
+
+				font-size: 16px;
+				line-height: 22px;
+				text-align: center;
+				cursor: pointer;
+				opacity: 0.2;
+
+				&:hover {
+					opacity: 0.5;
+				}
+			}
+
+			.name {
+				display: table-cell;
+			}
+
+			.shortcut {
+				display: table-cell;
+				width: 22px;
+
+				font-size: 13px;
+				line-height: 22px;
+				text-align: center;
+				opacity: 0.2;
+			}
+		}
+	}
+
+	.tabView {
+		top: 23px;
+
+		&.noTabs {
+			top: 0px;
+		}
+	}
+}

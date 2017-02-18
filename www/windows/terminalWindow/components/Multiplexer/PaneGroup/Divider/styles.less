@@ -1,0 +1,33 @@
+.multiplexer {
+	>.pane-group {
+		>.divider {
+			z-index: 100;
+			background-color: #B8B8B8;
+			background-clip: padding-box;
+		}
+
+		&.vertical {
+			>.divider {
+				width: 1px;
+				margin: 0 -5px;
+
+				cursor: col-resize;
+
+				border-left: 5px solid rgba(255, 255, 255, 0);
+				border-right: 5px solid rgba(255, 255, 255, 0);
+			}
+		}
+
+		&.horizontal {
+			>.divider {
+				height: 1px;
+				margin: -5px 0;
+
+				cursor: row-resize;
+
+				border-top: 5px solid rgba(255, 255, 255, 0);
+				border-bottom: 5px solid rgba(255, 255, 255, 0);
+			}
+		}
+	}
+}

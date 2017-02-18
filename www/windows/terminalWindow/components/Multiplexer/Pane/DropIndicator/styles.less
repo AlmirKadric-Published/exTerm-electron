@@ -1,0 +1,36 @@
+.multiplexer {
+	>.pane {
+		> .drop-indicator {
+			display: none;
+			z-index: 10;
+
+			pointer-events: none;
+
+			.overlay {
+				background-color: #EE0000;
+				border: 2px solid #FFFFFF;
+				opacity: 0.3;
+			}
+
+			&.droppingLeft, &.droppingRight, &.droppingTop, &.droppingBottom {
+				display: block;
+			}
+
+			&.droppingLeft .overlay {
+				right: 50%;
+			}
+
+			&.droppingRight .overlay {
+				left: 50%;
+			}
+
+			&.droppingTop .overlay {
+				bottom: 50%;
+			}
+
+			&.droppingBottom .overlay {
+				top: 50%;
+			}
+		}
+	}
+}

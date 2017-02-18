@@ -1,0 +1,18 @@
+.multiplexer {
+	>.pane-group {
+		display: flex;
+
+		>.multiplexer {
+			position: relative;
+			flex: 1;
+		}
+
+		&.vertical {
+			flex-direction: row;
+		}
+
+		&.horizontal {
+			flex-direction: column;
+		}
+	}
+}

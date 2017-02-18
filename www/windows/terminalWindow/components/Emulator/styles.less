@@ -1,0 +1,38 @@
+.emulator {
+	overflow: hidden;
+
+	.xterm-viewport {
+		margin-right: 2px;
+
+		&::-webkit-scrollbar {
+			width: 7px;
+			height: 7px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: #808080;
+			border-radius: 50px;
+
+			&:hover {
+				background: #808080;
+			}
+
+			&:active {
+				background: #9D9D9D;
+			}
+		}
+
+		&::-webkit-scrollbar-track {
+			background: transparent;
+			border-radius: 50px;
+
+			&:hover {
+				background: #303030;
+			}
+
+			&:active {
+				background: #333333;
+			}
+		}
+	}
+}
