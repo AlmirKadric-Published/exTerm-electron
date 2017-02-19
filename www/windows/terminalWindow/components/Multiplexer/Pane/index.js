@@ -176,8 +176,12 @@ class Pane extends React.Component {
 		const pane = this.props.pane;
 		const tab =  pane.tab.get();
 		const paneActive = tab.paneActive.get();
+		const relayGroupUID = pane.relayGroupUID.get();
+		const activeRelayGroupUID = paneActive.relayGroupUID.get();
 
+		const isActive = pane === paneActive;
 		const isAlone = tab.paneRoot.get().panes === undefined;
+		const isReceivingBroadcast = relayGroupUID && relayGroupUID === activeRelayGroupUID;
 		const dropDirection = pane.dropDirection.get();
 
 		return (
@@ -194,7 +198,7 @@ class Pane extends React.Component {
 				<Overlay key="overlay" pane={ pane }
 					onClick={ () => this.paneActivate(pane) }
 					onContextMenu={ () => this.paneMenu(pane) }
-					className={ classNames({ hide: pane === paneActive, noTitle: isAlone }) }
+					className={ classNames({ hide: isActive, clear: isReceivingBroadcast, noTitle: isAlone }) }
 				></Overlay>
 
 				<DropIndicator key="dropIndicator"
@@ -217,7 +221,7 @@ class Pane extends React.Component {
 
 				<Emulator key={ pane.uid } pane={ pane }
 					onContextMenu={ () => { this.paneMenu(pane) } }
-					className={ classNames('fill', { active: pane === paneActive }) }
+					className={ classNames('fill', { active: isActive }) }
 				></Emulator>
 			</div>
 		);

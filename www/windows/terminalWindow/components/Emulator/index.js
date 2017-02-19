@@ -34,6 +34,13 @@ class Emulator extends React.Component {
 		}, 300, { trailing: true });
 	}
 
+	copyOnSelection(e) {
+		const isSelecting = document.getSelection().type === 'Range';
+		if (isSelecting) {
+			document.execCommand("copy");
+		}
+	}
+
 	render() {
 		const pane = this.props.pane;
 		const baseSize = pane.baseFontSize;
@@ -43,6 +50,7 @@ class Emulator extends React.Component {
 			<div
 				ref={ (container) => container && this.updateTerminal(container) }
 				onContextMenu={ this.props.onContextMenu }
+				onMouseUp={ this.copyOnSelection }
 				className={ classNames('emulator', this.props.className) }
 				style={ { 'fontSize': `${fontSize}px` } }
 			>

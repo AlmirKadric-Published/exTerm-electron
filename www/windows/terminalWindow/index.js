@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { throttle } from 'lodash';
+
 import TabManager from './components/TabManager';
 import Layout from './states/Layout';
 
@@ -57,6 +59,12 @@ document.onreadystatechange = function () {
 		};
 
 
+		//
+		window.onresize = throttle(() => {
+			layout.tabFitActive();
+		}, 300, { trailing: true });
+
+
 		// Setup window event handlers
 		ipcRenderer.on('newTab', () => layout.tabCreate());
 		ipcRenderer.on('splitVertical', () => layout.paneSplitVertical());
@@ -64,9 +72,12 @@ document.onreadystatechange = function () {
 		ipcRenderer.on('relayGroupToggle', (e, relayGroupUID) => layout.relayGroupToggle(relayGroupUID));
 		ipcRenderer.on('relayGroupToggleTab', (e, relayGroupUID) => layout.relayGroupToggleTab(relayGroupUID));
 		ipcRenderer.on('relayGroupToggleWindow', (e, relayGroupUID) => layout.relayGroupToggleWindow(relayGroupUID));
+		ipcRenderer.on('selectAll', () => layout.paneSelectAll());
+		ipcRenderer.on('find', () => layout.paneFind());
 		ipcRenderer.on('clearBuffer', () => layout.paneClearBuffer());
 		ipcRenderer.on('changeTextSize', (e, modifier) => layout.paneChangeTextSize(modifier));
 		ipcRenderer.on('tabSelect', (e, modifier) => layout.tabSelectNxtPrv(modifier));
+		ipcRenderer.on('tabSelectI', (e, index) => layout.tabSelect(index));
 		ipcRenderer.on('tabMove', (e, modifier) => layout.tabMove(modifier));
 		ipcRenderer.on('paneSelect', (e, direction) => layout.paneSelect(direction));
 		ipcRenderer.on('paneMove', (e, direction) => layout.paneMove(direction));
@@ -80,16 +91,5 @@ document.onreadystatechange = function () {
 		ReactDOM.render((
 			<TabManager layout={ layout }></TabManager>
 		), document.getElementById('app'));
-
-		// TODO: replace this timeout with a proper after render callback
-		setTimeout(() => {
-			// Show the window once initial rendering is complete
-			thisWindow.show();
-
-			// Open up developer tools if in dev mode
-			if (global.isDevelopmentMode) {
-				thisWindow.webContents.openDevTools();
-			}
-		}, 1000);
 	}
 };

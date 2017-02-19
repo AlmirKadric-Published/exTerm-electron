@@ -1,13 +1,16 @@
+'use strict';
+
+const { app, Menu, shell } = require('electron');
+
 const {
 	windowCreate, windowGetActive, windowMinimizeAll,
 	relayGroupGetCurrent, relayGroupDestroyCurrent, relayGroupToggleAll
 } = require('../terminalManager');
+
 const {
 	DIRECTION_LEFT, DIRECTION_RIGHT,
 	DIRECTION_TOP, DIRECTION_BOTTOM
 } = require('../../constants.js');
-
-const { app, Menu, shell, globalShortcut } = require('electron');
 
 
 function createTemplate() {
@@ -123,13 +126,13 @@ function createTemplate() {
 		{ type: 'separator' },
 		{
 			label: 'Select All',
-			click: () => console.log('TODO'),
+			click: () => windowGetActive() && windowGetActive().selectAll(),
 			accelerator: 'CommandOrControl+A'
 		},
 		{ type: 'separator' },
 		{
 			label: 'Find',
-			click: () => console.log('TODO'),
+			click: () => windowGetActive() && windowGetActive().find(),
 			accelerator: 'CommandOrControl+F'
 		},
 		{ type: 'separator' },
@@ -329,40 +332,4 @@ exports.update = () => {
 	const template = createTemplate();
 	const windowMenu = Menu.buildFromTemplate(template);
 	Menu.setApplicationMenu(windowMenu);
-
-	// HACK: The below accelerators don't work from the menu
-	// NOTE; This seems to hijack the ctrl+arrow sequence from all applcations on windows
-	globalShortcut.unregister('CommandOrControl+Up');
-	globalShortcut.register('CommandOrControl+Up', () => {
-		windowGetActive() && windowGetActive().paneSelect(DIRECTION_TOP);
-	});
-	globalShortcut.unregister('CommandOrControl+Down');
-	globalShortcut.register('CommandOrControl+Down', () => {
-		windowGetActive() && windowGetActive().paneSelect(DIRECTION_BOTTOM);
-	});
-	globalShortcut.unregister('CommandOrControl+Left');
-	globalShortcut.register('CommandOrControl+Left', () => {
-		windowGetActive() && windowGetActive().paneSelect(DIRECTION_LEFT);
-	});
-	globalShortcut.unregister('CommandOrControl+Right');
-	globalShortcut.register('CommandOrControl+Right', () => {
-		windowGetActive() && windowGetActive().paneSelect(DIRECTION_RIGHT);
-	});
-
-	globalShortcut.unregister('CommandOrControl+Shift+Up');
-	globalShortcut.register('CommandOrControl+Shift+Up', () => {
-		windowGetActive() && windowGetActive().paneMove(DIRECTION_TOP);
-	});
-	globalShortcut.unregister('CommandOrControl+Shift+Down');
-	globalShortcut.register('CommandOrControl+Shift+Down', () => {
-		windowGetActive() && windowGetActive().paneMove(DIRECTION_BOTTOM);
-	});
-	globalShortcut.unregister('CommandOrControl+Shift+Left');
-	globalShortcut.register('CommandOrControl+Shift+Left', () => {
-		windowGetActive() && windowGetActive().paneMove(DIRECTION_LEFT);
-	});
-	globalShortcut.unregister('CommandOrControl+Shift+Right');
-	globalShortcut.register('CommandOrControl+Shift+Right', () => {
-		windowGetActive() && windowGetActive().paneMove(DIRECTION_RIGHT);
-	});
 };

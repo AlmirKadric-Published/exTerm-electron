@@ -58,6 +58,21 @@ export default class Layout {
 
 	/**
 	 *
+	 * @param index
+	 */
+	tabSelect(index) {
+		transaction(() => {
+			if (index >= this.tabs.length) {
+				return;
+			}
+
+			const tab = this.tabs[index];
+			this.tabActive.set(tab);
+		});
+	}
+
+	/**
+	 *
 	 * @param modifier
      */
 	tabSelectNxtPrv(modifier) {
@@ -118,6 +133,17 @@ export default class Layout {
 		transaction(() => {
 			this.tabGet(index).activate();
 		});
+	}
+
+	/**
+	 *
+	 */
+	tabFitActive() {
+		const tabActive = this.tabActive.get();
+		const panes = tabActive.panes;
+		for (const pane of panes) {
+			pane.terminal.fit();
+		}
 	}
 
 	/**
@@ -412,6 +438,40 @@ export default class Layout {
 				}
 			}
 		});
+	}
+
+	/**
+	 *
+	 */
+	paneSelectAll() {
+		const activeTab = this.tabActive.get();
+		const activePane = activeTab.paneActive.get();
+		const rows = activePane.terminal.rowContainer;
+
+		// Select entire buffer
+		const selectAllRange = document.createRange();
+		selectAllRange.setStart(rows, 0);
+		selectAllRange.setEnd(rows, rows.children.length);
+
+		const selection = document.getSelection();
+		selection.removeAllRanges();
+		selection.addRange(selectAllRange);
+
+		// Copy selection to clipboard
+		document.execCommand("copy");
+	}
+
+	/**
+	 *
+	 */
+	paneFind() {
+		/*
+		const activeTab = this.tabActive.get();
+		const activePane = activeTab.paneActive.get();
+		const rows = activePane.terminal.rowContainer;
+		const buffer = rows.innerText;
+		console.log('FIND', rows, buffer, buffer.indexOf('serving build'));
+		*/
 	}
 
 	/**

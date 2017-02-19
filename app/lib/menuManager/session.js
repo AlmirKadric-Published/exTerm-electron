@@ -13,15 +13,8 @@ function createTemplate() {
 			label: 'New Window',
 			click: () => windowCreate()
 		},
-		{ type: 'separator' },
-		{
-			label: 'Select Tab'
-			//  - TABS
-		},
-		{
-			label: 'Select Window'
-			//  - WINDOWS
-		},
+		// TODO: SELECT TAB LIST
+		// TODO: SELECT WINDOW LIST
 		{ type: 'separator' },
 		{
 			label: 'Split Pane Vertically',
@@ -46,7 +39,7 @@ function createTemplate() {
 		{ type: 'separator' },
 		{
 			label: 'Select All',
-			click: () => console.log('TODO')
+			click: () => windowGetActive() && windowGetActive().selectAll()
 		},
 		{ type: 'separator' },
 		{
