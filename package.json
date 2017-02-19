@@ -15,11 +15,13 @@
   "scripts": {
     "deps": "npm install . && install-app-deps",
     "dev": "electron ./app --dev",
-    "test": "eslint .",
-    "icons:win": "png2ico ./visual_identity/icon/exTerm.ico ./visual_identity/icon/exTerm.iconset/icon_16x16.png ./visual_identity/icon/exTerm.iconset/icon_32x32.png ./visual_identity/icon/exTerm.iconset/icon_64x64.png ./visual_identity/icon/exTerm.iconset/icon_128x128.png",
-    "icons:mac": "iconutil -c icns ./visual_identity/icon/exTerm.iconset",
+    "test": "run-s test:lint",
+    "test:lint": "eslint .",
+    "icons:all": "run-s icons:mac icons:win",
+    "icons:mac": "iconutil -c icns --output ./build/icon.icns ./visual_identity/icon/exTerm.iconset",
+    "icons:win": "icotool -c -o ./build/icon.ico ./visual_identity/icon/exTerm.iconset/icon_16x16.png ./visual_identity/icon/exTerm.iconset/icon_32x32.png ./visual_identity/icon/exTerm.iconset/icon_64x64.png ./visual_identity/icon/exTerm.iconset/icon_128x128.png ./visual_identity/icon/exTerm.iconset/icon_256x256.png",
     "build": "webpack -p && build",
-    "build:open": "open ./build/mac/exTerm.app"
+    "build:all": "webpack -p && build -mwl"
   },
   "dependencies": {
     "npm-run-all": "4.0.1",

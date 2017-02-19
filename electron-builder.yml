@@ -8,11 +8,7 @@ directories:
 
 
 # windows distribution settings
-win:
-    icon: "./visual_identity/icon/exTerm.ico"
-
 nsis:
-    installerIcon: "./visual_identity/icon/exTerm.ico"
     license: "./LICENSE.md"
 
 
@@ -20,11 +16,6 @@ nsis:
 # macOS distribution settings
 mac:
     category: "public.app-category.utilities"
-    icon: "./visual_identity/icon/exTerm.icns"
-
-dmg:
-    icon: "./visual_identity/icon/exTerm.icns"
-    background: # TODO
 
 
 

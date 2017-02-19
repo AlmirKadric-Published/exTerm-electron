@@ -1,7 +1,9 @@
 .idea/
 app/node_modules/
 app/windows/
-build/
+build/*
+!build/icon.icns
+!build/icon.ico
 node_modules/
 
 .DS_Store
