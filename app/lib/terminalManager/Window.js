@@ -2,6 +2,7 @@
 
 const uuid = require('node-uuid');
 const RelayGroup = require('./RelayGroup');
+const globalShortcuts = require('../shortcutManager/globalShortcuts');
 
 const { BrowserWindow } = require('electron');
 const { windows, sessions, relayGroups } = require('.');
@@ -30,7 +31,18 @@ module.exports = class Window {
 		this.browserWindow.uid = uid;
 		this.browserWindow.loadURL(`file://${__dirname}/../../windows/terminalWindow/index.html?uid=${uid}`);
 
+		// Show window and open up developer tools if in dev mode
+		this.browserWindow.show();
+		if (global.isDevelopmentMode) {
+			this.browserWindow.webContents.openDevTools();
+		}
+
+		// Register global shortcuts on first window show as the focus event is not always fired
+		globalShortcuts.registerShortcuts();
+
 		// Setup event handlers
+		this.browserWindow.on('focus', () => globalShortcuts.registerShortcuts());
+		this.browserWindow.on('blur', () => globalShortcuts.unregisterShortcuts());
 		this.browserWindow.on('close', () => this.closeWindow());
 		this.browserWindow.on('closed', () => {
 			// Destroy all sessions associated with this window
@@ -112,6 +124,20 @@ module.exports = class Window {
 	}
 
 	/**
+	 * Tells window to select all contents of active pane buffer
+	 */
+	selectAll() {
+		this.browserWindow.webContents.send('selectAll');
+	}
+
+	/**
+	 * Tells window to begin searching within active pane buffer
+	 */
+	find() {
+		this.browserWindow.webContents.send('find');
+	}
+
+	/**
 	 * Tells window to clear active pane buffer
 	 */
 	clearBuffer() {
@@ -132,6 +158,14 @@ module.exports = class Window {
      */
 	tabSelect(modifier) {
 		this.browserWindow.webContents.send('tabSelect', modifier);
+	}
+
+	/**
+	 *
+	 * @param index
+	 */
+	tabSelectI(index) {
+		this.browserWindow.webContents.send('tabSelectI', index);
 	}
 
 	/**
