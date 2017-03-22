@@ -2,8 +2,7 @@
 app/node_modules/
 app/windows/
 build/*
-!build/icon.icns
-!build/icon.ico
+!build/icons/
 node_modules/
 
 .DS_Store
